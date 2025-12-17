@@ -41,3 +41,19 @@ with open(filename, mode="w", newline="", encoding="utf-8") as file:
         writer.writerow([titre, prix, localisation])
 
 print(f"Fichier {filename} généré avec succès")
+
+import boto3
+
+def upload_file_s3(file_path, bucket_name, object_name=None):
+    if object_name is None:
+        object_name = file_path
+
+    s3 = boto3.client("s3")
+    s3.upload_file(file_path, bucket_name, object_name)
+
+
+# Exemple d'utilisation
+file_path = "data/file.json"
+file_name = "file.json"
+MY_BUCKET_NAME = "m2dsia-ndiaye-mmoustapha"
+upload_file_s3(file_path, MY_BUCKET_NAME, file_name)
