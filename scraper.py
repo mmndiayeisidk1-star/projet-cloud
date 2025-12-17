@@ -1,7 +1,9 @@
 import requests
-from bs4 import BeautifulSoup
+from bs4 
+import BeautifulSoup
 import csv
 from datetime import datetime
+import boto3
 
 URL = "https://immobilier-au-senegal.com/terrains-a-vendre/"
 
@@ -42,7 +44,7 @@ with open(filename, mode="w", newline="", encoding="utf-8") as file:
 
 print(f"Fichier {filename} généré avec succès")
 
-import boto3
+
 
 def upload_file_s3(file_path, bucket_name, object_name=None):
     if object_name is None:
@@ -51,9 +53,7 @@ def upload_file_s3(file_path, bucket_name, object_name=None):
     s3 = boto3.client("s3")
     s3.upload_file(file_path, bucket_name, object_name)
 
-
-# Exemple d'utilisation
-file_path = "data/file.json"
-file_name = "file.json"
+file_path = "data/annnonces.csv"
+file_name = "annnonces.csv"
 MY_BUCKET_NAME = "m2dsia-ndiaye-mmoustapha"
 upload_file_s3(file_path, MY_BUCKET_NAME, file_name)
